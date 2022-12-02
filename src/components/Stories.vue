@@ -162,9 +162,13 @@ export default {
       this.$emit('сurrentAllImagesEnd', index);
     },
     onCurrentImageEnd(index) {
-      this.stories[index].images[this.key].viewed = true;
-      this.$emit('сurrentImageEnd', this.key);
-      this.key++;
+       if (this.key in this.stories[index].images){      
+        this.stories[index].images[this.key].viewed = true;
+        this.$emit('сurrentImageEnd', this.key);
+        this.key++;
+      } else {
+        this.key = 0  
+      }
     },
     next(index) {
       this.isPaused = false;
